@@ -167,6 +167,7 @@ def tween_request_logging(handler, registry):
             response = handler(request)
             duration = time() - now
             rheaders = response.headers
+            rheaders['Access-Control-Allow-Origin'] = '*'
             serial = rheaders.get("X-DEVPI-SERIAL")
             rheaders.update(meta_headers)
             uuid, master_uuid = make_uuid_headers(nodeinfo)
@@ -1230,4 +1231,3 @@ def get_pure_metadata(somedict):
         if n[0] != "+":
             metadata[n] = v
     return metadata
-
